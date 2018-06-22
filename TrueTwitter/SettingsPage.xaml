@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="TrueTwitter.MainPage"
+    x:Class="TrueTwitter.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TrueTwitter"
@@ -18,17 +18,17 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" 
-                   x:Name="mainTitle"
+                   x:Name="settingsTitle"
                    Margin="10,0,0,0" 
-                   x:Uid="MainPage_Title" 
+                   x:Uid="SettingsPage_settingsTitle" 
                    VerticalAlignment="Center" 
                    HorizontalAlignment="Left" 
                    Style="{ThemeResource TitleTextBlockStyle}" 
                    Text=""/>
-        <Button x:Name="settingsButton" Grid.Row="0" Grid.Column="1" Background="Transparent" Click="settingsButton_Click">
+        <Button x:Name="homeButton" Grid.Row="0" Grid.Column="1" Background="Transparent" Click="homeButton_Click">
             <FontIcon
                       FontSize="20"
-                      Glyph="&#xE713;" 
+                      Glyph="&#xE80F;" 
                       MirroredWhenRightToLeft="True" 
                       VerticalAlignment="Center" 
                       HorizontalAlignment="Center"/>
