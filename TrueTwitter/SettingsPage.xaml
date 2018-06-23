@@ -5,9 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="using:TrueTwitter.Models"
+    xmlns:utils="using:TrueTwitter.Utils"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <utils:BooleanToVisibilityConverter x:Key="Converter" />
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -44,7 +47,14 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBox Margin="0,5,0,5" Grid.Row="0" Grid.Column="0" x:Uid="SettingsPage_Follow_Input" x:Name="followInput"></TextBox>
+                    <TextBox 
+                        Margin="0,5,0,5" 
+                        Grid.Row="0" 
+                        Grid.Column="0"
+                        KeyUp="followInput_KeyUp"
+                        x:Uid="SettingsPage_Follow_Input" 
+                        x:Name="followInput">
+                    </TextBox>
                     <Button x:Name="addFollow" Margin="5,0,5,0" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Click="addFollow_Click">
                         <FontIcon
                           FontSize="20"
@@ -58,20 +68,42 @@
                             <DataTemplate x:DataType="model:FollowItem">
                                 <Grid Margin="5,5,5,5">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="30"/>
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
+                                    <TextBlock 
+                                        Visibility="{Binding IsUser, Converter={StaticResource Converter}}"
+                                        VerticalAlignment="Stretch" 
+                                        HorizontalAlignment="Center" 
+                                        FontSize="20" 
+                                        Grid.Column="0" 
+                                        Text="@"/>
+                                    <TextBlock
+                                        Visibility="{Binding IsHashtag, Converter={StaticResource Converter}}"
+                                        VerticalAlignment="Stretch" 
+                                        HorizontalAlignment="Center" 
+                                        FontSize="20" 
+                                        Grid.Column="0" 
+                                        Text="#"/>
+                                    <FontIcon
+                                        Visibility="{Binding IsSearch, Converter={StaticResource Converter}}"
+                                        Grid.Column="0"
+                                        FontSize="20"
+                                        Glyph="&#xE721;" 
+                                        MirroredWhenRightToLeft="True" 
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"/>
                                     <TextBlock VerticalAlignment="Stretch" Padding="5,5,5,5" Grid.Column="2" Text="{Binding Id}"/>
                                     <Button 
                                         x:Name="deleteFollow" 
                                         Margin="0,0,0,0" 
                                         VerticalAlignment="Stretch" 
                                         Grid.Row="0" 
-                                        Grid.Column="0" 
+                                        Grid.Column="1" 
                                         Click="deleteFollow_Click"
                                         CommandParameter="{Binding}">
                                         <FontIcon

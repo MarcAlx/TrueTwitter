@@ -160,5 +160,19 @@ namespace TrueTwitter
                 }
             }
         }
+
+        /// <summary>
+        /// On keyup (enter only) -> Submit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void followInput_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                this.addFollow_Click(null, null);
+                this.followInput.Text = "";
+            }
+        }
     }
 }

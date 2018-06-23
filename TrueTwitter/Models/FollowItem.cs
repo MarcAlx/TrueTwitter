@@ -36,11 +36,11 @@ namespace TrueTwitter.Models
             if (!String.IsNullOrEmpty(str))
             {
                 var tmp = str.Trim();
-                if (tmp.StartsWith("@") && tmp.Split('@').Count() == 1)
+                if (tmp.StartsWith("@") && tmp.Split('@').Count() == 2)
                 {
                     return new FollowItem(str,FollowType.USER);
                 }
-                else if (tmp.StartsWith("#") && tmp.Split('#').Count()==1)
+                else if (tmp.StartsWith("#") && tmp.Split('#').Count()==2)
                 {
                     return new FollowItem(str, FollowType.HASHTAG);
                 }
@@ -59,6 +59,29 @@ namespace TrueTwitter.Models
                 return this.Id.Equals((o as FollowItem).Id);
             }
             return false;
+        }
+
+        public bool IsUser
+        {
+            get
+            {
+                return this.Type == FollowType.USER;
+            }
+        }
+
+        public bool IsHashtag
+        {
+            get
+            {
+                return this.Type == FollowType.HASHTAG;
+            }
+        }
+
+        public bool IsSearch {
+            get
+            {
+                return this.Type == FollowType.SEARCH;
+            }
         }
     }
 }
