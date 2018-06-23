@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TrueTwitter.Managers;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -23,6 +24,16 @@ namespace TrueTwitter
     sealed partial class App : Application
     {
         /// <summary>
+        /// twitter manager used by the app
+        /// </summary>
+        public static ITwitterManager AppTwitterManager = null;
+
+        /// <summary>
+        /// Settings manager used by the app
+        /// </summary>
+        public static ISettingsManager AppSettingsManager = null;
+
+        /// <summary>
         /// Initialise l'objet d'application de singleton.  Il s'agit de la première ligne du code créé
         /// à être exécutée. Elle correspond donc à l'équivalent logique de main() ou WinMain().
         /// </summary>
@@ -30,6 +41,33 @@ namespace TrueTwitter
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.initManagers();
+            //TODO check internet 
+            this.tryAuth();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private async void tryAuth()
+        {
+            if (!String.IsNullOrEmpty(App.AppSettingsManager.ConsumerKey) && !String.IsNullOrEmpty(App.AppSettingsManager.ConsumerSecret))
+            {
+                bool auth = await App.AppTwitterManager.SubmitCredentials(App.AppSettingsManager.ConsumerKey,App.AppSettingsManager.ConsumerSecret);
+                if (!auth)
+                {
+                    //TODO navigate to settings + auth pivot
+                } 
+            }
+        }
+
+        /// <summary>
+        /// Init managers of the app
+        /// </summary>
+        private void initManagers()
+        {
+            AppTwitterManager = TwitterManager.Instance;
+            AppSettingsManager = SettingsManager.Instance;
         }
 
         /// <summary>

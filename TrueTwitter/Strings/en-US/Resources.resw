@@ -120,7 +120,43 @@
   <data name="MainPage_Title.Text" xml:space="preserve">
     <value>True Twitter</value>
   </data>
+  <data name="SettingsPage_ConsumerKey.Text" xml:space="preserve">
+    <value>Consumer Key</value>
+  </data>
+  <data name="SettingsPage_ConsumerKey_Input.PlaceholderText" xml:space="preserve">
+    <value>type here</value>
+  </data>
+  <data name="SettingsPage_ConsumerSecret.Text" xml:space="preserve">
+    <value>Consumer Secret</value>
+  </data>
+  <data name="SettingsPage_ConsumerSecret_Input.PlaceholderText" xml:space="preserve">
+    <value>type here</value>
+  </data>
+  <data name="SettingsPage_CredentialsPivot.Header" xml:space="preserve">
+    <value>Credentials</value>
+  </data>
+  <data name="SettingsPage_FollowingPivot.Header" xml:space="preserve">
+    <value>Following</value>
+  </data>
   <data name="SettingsPage_settingsTitle.Text" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="SettingsPage_Status.Text" xml:space="preserve">
+    <value>Status will appear here</value>
+  </data>
+  <data name="SettingPage_Auth_KO" xml:space="preserve">
+    <value>Auth KO</value>
+  </data>
+  <data name="SettingPage_Auth_OK" xml:space="preserve">
+    <value>Auth successfull</value>
+  </data>
+  <data name="SettingPage_ConsumerKey_Needed" xml:space="preserve">
+    <value>Consumer key is needed in order to auth</value>
+  </data>
+  <data name="SettingPage_ConsumerSecret_Needed" xml:space="preserve">
+    <value>Consumer secret is needed in order to auth</value>
+  </data>
+  <data name="SettingsPage_Follow_Input.PlaceholderText" xml:space="preserve">
+    <value>@who, #what, worldcup...</value>
   </data>
 </root>
