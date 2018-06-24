@@ -171,4 +171,13 @@
   <data name="SettingsPage_AboutText.Text" xml:space="preserve">
     <value>True Twitter is an open source project that aims one thing : display the twitter you want. For more information check the [GitHub Repo](https://github.com/MarcAlx/TrueTwitter.git). Created by [MarcAlx](https://github.com/MarcAlx/).</value>
   </data>
+  <data name="SettingsPage_appInfo" xml:space="preserve">
+    <value>Version {0}.{1}.{2}.{3}</value>
+  </data>
+  <data name="MainPage_Auth_Needed" xml:space="preserve">
+    <value>You need to be authenticated in order to retrieve tweets. (Settings -&gt; Credentials)</value>
+  </data>
+  <data name="SettingsPage_Credentials_Info.Text" xml:space="preserve">
+    <value>You can generate credentials [here](https://apps.twitter.com/app/new)</value>
+  </data>
 </root>

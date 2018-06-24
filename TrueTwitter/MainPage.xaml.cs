@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using TrueTwitter.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -36,13 +37,21 @@ namespace TrueTwitter
 
         private async void refreshButton_Click(object sender, RoutedEventArgs e)
         {
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            if (!App.AppTwitterManager.IsAuth)
+            {
+                 var dialog = new MessageDialog(loader.GetString("MainPage_Auth_Needed"));
+                await dialog.ShowAsync();
+                this.Frame.Navigate(typeof(SettingsPage));
+                return;
+            }
+
             this.searchProgressRing.IsActive = true;
 
             var res = new List<Tweet>();
             var tmp = await App.AppTwitterManager.GetTweets(App.AppSettingsManager.Followings);
 
             //add a "All" category by copying all tweets
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             var allTitle = loader.GetString("MainPage_AllCategory_Name");
             res.AddRange(tmp.Select(t =>
             {

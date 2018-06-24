@@ -5,8 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TrueTwitter.Models;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +32,7 @@ namespace TrueTwitter
             this.trySetCredentialsFromConfig();
             this.setStatus(App.AppTwitterManager.IsAuth);
             this.initFollowing();
+            this.initInfoLabel();
         }
 
         public ObservableCollection<FollowItem> Following;
@@ -173,6 +176,29 @@ namespace TrueTwitter
                 this.addFollow_Click(null, null);
                 this.followInput.Text = "";
             }
+        }
+
+        /// <summary>
+        /// init info label in ui
+        /// </summary>
+        private void initInfoLabel()
+        {
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            String info = loader.GetString("SettingsPage_appInfo");
+            Package package = Package.Current;
+            PackageId packageId = package.Id;
+            PackageVersion version = packageId.Version;
+            this.appInfoLabel.Text = String.Format(info, version.Major, version.Minor, version.Build, version.Revision);
+        }
+
+        /// <summary>
+        /// On markdown link click open in browser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void MarkdownTextBlock_LinkClicked(object sender, Microsoft.Toolkit.Uwp.UI.Controls.LinkClickedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri(e.Link));
         }
     }
 }

@@ -131,6 +131,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Margin="0,5,0,5" Grid.Row="0" Grid.Column="0" x:Uid="SettingsPage_ConsumerKey"></TextBlock>
                     <TextBox   Margin="0,5,0,5" Grid.Row="0" Grid.Column="1" x:Uid="SettingsPage_ConsumerKey_Input" x:Name="consumerKeyInput"></TextBox>
@@ -145,11 +146,15 @@
                           HorizontalAlignment="Center"/>
                     </Button>
                     <TextBlock x:Name="statusText" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Uid="SettingsPage_Status"></TextBlock>
+                    <controls:MarkdownTextBlock Grid.Row="3" Grid.ColumnSpan="3" x:Uid="SettingsPage_Credentials_Info" LinkClicked="MarkdownTextBlock_LinkClicked" />
                 </Grid>
             </PivotItem>
             <PivotItem x:Uid="SettingsPage_AboutPivot">
-                <controls:MarkdownTextBlock x:Uid="SettingsPage_AboutText" Text="">
-                </controls:MarkdownTextBlock>
+                <StackPanel>
+                    <controls:MarkdownTextBlock x:Uid="SettingsPage_AboutText" Text="" LinkClicked="MarkdownTextBlock_LinkClicked">
+                    </controls:MarkdownTextBlock>
+                    <TextBlock Margin="0,5,0,0" x:Name="appInfoLabel"/>
+                </StackPanel>
             </PivotItem>
         </Pivot>
     </Grid>
