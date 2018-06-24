@@ -16,11 +16,11 @@ Go to https://apps.twitter.com/app/new
 
 ## Screenshots
 
-![screenshot, default, main ](./doc/main.png)
+![screenshot, default, main ](./doc/main.PNG)
 
 ![screenshot, default, following](./doc/following.png)
 
-![screenshot, default, cred](./doc/credentials.png)
+![screenshot, default, cred](./doc/credentials.PNG)
 
 ## License
 
