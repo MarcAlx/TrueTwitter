@@ -44,5 +44,10 @@ namespace TrueTwitter
                       select g;
             this.searchProgressRing.IsActive = false;
         }
+
+        private async void openButton_Click(object sender, RoutedEventArgs e)
+        {
+            await Windows.System.Launcher.LaunchUriAsync(new Uri((sender as Button).CommandParameter.ToString()));
+        }
     }
 }
