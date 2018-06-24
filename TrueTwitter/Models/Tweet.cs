@@ -25,6 +25,7 @@ namespace TrueTwitter.Models
             this.AssociatedID = t.AssociatedID;
             this.MediaURI = new List<MediaItem>(t.MediaURI);
             this.User = new User(t.User);
+            this.AssociatedFollowItem = t.AssociatedFollowItem;
         }
 
         /// <summary>
@@ -46,6 +47,11 @@ namespace TrueTwitter.Models
         /// App search that lead to this tweet
         /// </summary>
         public String AssociatedID { get; set; }
+
+        /// <summary>
+        /// FollowItem that lead to this tweet
+        /// </summary>
+        public FollowItem AssociatedFollowItem { get; set; }
 
         /// <summary>
         /// List of associated media URI

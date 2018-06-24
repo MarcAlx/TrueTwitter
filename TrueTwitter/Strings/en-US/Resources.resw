@@ -163,7 +163,7 @@
     <value>Refresh</value>
   </data>
   <data name="MainPage_AllCategory_Name" xml:space="preserve">
-    <value>All</value>
+    <value>All followed account</value>
   </data>
   <data name="SettingsPage_AboutPivot.Header" xml:space="preserve">
     <value>About</value>

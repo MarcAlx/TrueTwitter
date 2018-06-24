@@ -53,14 +53,22 @@ namespace TrueTwitter
 
             //add a "All" category by copying all tweets
             var allTitle = loader.GetString("MainPage_AllCategory_Name");
-            res.AddRange(tmp.Select(t =>
+            foreach(var t in tmp)
             {
-                var twt = new Tweet(t);
-                twt.AssociatedID = allTitle;
-                return twt;
-            }));
-            res.AddRange(tmp);
-
+                //Put user in all
+                if (t.AssociatedFollowItem.Type == FollowType.USER)
+                {
+                    var twt = new Tweet(t);
+                    twt.AssociatedID = allTitle;
+                    res.Add(twt);
+                }
+                //put hashtag and search in a dedicated column
+                else
+                {
+                    res.Add(t);
+                }
+            }
+            
             var groupedTweets = from item in res
                       group item by item.AssociatedID into g
                       select g;

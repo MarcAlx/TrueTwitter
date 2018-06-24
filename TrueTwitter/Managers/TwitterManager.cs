@@ -77,20 +77,20 @@ namespace TrueTwitter.Managers
 
             //1. launch tasks
             List<Task<IEnumerable<ITweet>>> toWait = new List<Task<IEnumerable<ITweet>>>();
-            Dictionary<Task, String> taskToId = new Dictionary<Task, string>();
+            Dictionary<Task, FollowItem> taskToItem = new Dictionary<Task, FollowItem>();
             foreach (var item in items)
             {
                 if(item.Type==FollowType.HASHTAG || item.Type == FollowType.SEARCH)
                 {
                     var tmpT = SearchAsync.SearchTweets(item.Id);
                     toWait.Add(tmpT);
-                    taskToId.Add(tmpT, item.Id);
+                    taskToItem.Add(tmpT, item);
                 }
                 else if (item.Type == FollowType.USER)
                 {
                     var tmpT = TimelineAsync.GetUserTimeline(item.Id);
                     toWait.Add(tmpT);
-                    taskToId.Add(tmpT, item.Id);
+                    taskToItem.Add(tmpT, item);
                 }
                 else
                 {
@@ -108,19 +108,22 @@ namespace TrueTwitter.Managers
                 {
                     foreach(var tweet in task.Result)
                     {
-                        res.Add(new Models.Tweet()
-                        {
-                            Content = tweet.Text,
-                            Date = tweet.CreatedAt,
-                            URL = tweet.Url,
-                            AssociatedID = taskToId[task],
-                            MediaURI = tweet.Media.Select(item => new MediaItem() { URI=item.MediaURL }).ToList(),
-                            User = new Models.User()
+                        if (String.IsNullOrEmpty(tweet.InReplyToScreenName)){
+                            res.Add(new Models.Tweet()
                             {
-                                Name=tweet.CreatedBy.Name,
-                                ImageURI=tweet.CreatedBy.ProfileImageUrl
-                            }
-                        });
+                                Content = tweet.Text,
+                                Date = tweet.CreatedAt,
+                                URL = tweet.Url,
+                                AssociatedID = taskToItem[task].Id,
+                                AssociatedFollowItem = taskToItem[task],
+                                MediaURI = tweet.Media.Select(item => new MediaItem() { URI = item.MediaURL }).ToList(),
+                                User = new Models.User()
+                                {
+                                    Name = tweet.CreatedBy.Name,
+                                    ImageURI = tweet.CreatedBy.ProfileImageUrl
+                                }
+                            });
+                        }
                     }
                 }
             }
