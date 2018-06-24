@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:model="using:TrueTwitter.Models"
     xmlns:utils="using:TrueTwitter.Utils"
     mc:Ignorable="d"
@@ -145,6 +146,10 @@
                     </Button>
                     <TextBlock x:Name="statusText" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Uid="SettingsPage_Status"></TextBlock>
                 </Grid>
+            </PivotItem>
+            <PivotItem x:Uid="SettingsPage_AboutPivot">
+                <controls:MarkdownTextBlock x:Uid="SettingsPage_AboutText" Text="">
+                </controls:MarkdownTextBlock>
             </PivotItem>
         </Pivot>
     </Grid>

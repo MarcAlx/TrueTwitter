@@ -165,4 +165,10 @@
   <data name="MainPage_AllCategory_Name" xml:space="preserve">
     <value>All</value>
   </data>
+  <data name="SettingsPage_AboutPivot.Header" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="SettingsPage_AboutText.Text" xml:space="preserve">
+    <value>True Twitter is an open source project that aims one thing : display the twitter you want. For more information check the [GitHub Repo](https://github.com/MarcAlx/TrueTwitter.git). Created by [MarcAlx](https://github.com/MarcAlx/).</value>
+  </data>
 </root>
