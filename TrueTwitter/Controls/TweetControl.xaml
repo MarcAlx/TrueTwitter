@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TrueTwitter.Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utils="using:TrueTwitter.Utils"
@@ -15,6 +16,7 @@
 
     <Grid Margin="5,5,5,5" Width="400" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -41,5 +43,31 @@
                 MirroredWhenRightToLeft="True" 
                 HorizontalAlignment="Center"/>
         </Button>
+        <controls:Carousel 
+            x:Name="mediaCarousel"
+            Grid.Row="3"
+            Grid.ColumnSpan="4"
+            ItemsSource="{Binding Model.MediaURI}"
+            InvertPositive="True" 
+            ItemDepth="300"
+            ItemMargin="0" 
+            ItemRotationX="0"
+            ItemRotationY="45" 
+            ItemRotationZ="0"
+            SelectedIndex="0"
+            Orientation="Horizontal">
+            <controls:Carousel.EasingFunction>
+                <CubicEase EasingMode="EaseOut" />
+            </controls:Carousel.EasingFunction>
+            <controls:Carousel.ItemTemplate>
+                <DataTemplate>
+                    <Image Width="200"
+                           Height="200"
+                           VerticalAlignment="Center"
+                           Source="{Binding URI}"
+                           Stretch="Uniform" />
+                </DataTemplate>
+            </controls:Carousel.ItemTemplate>
+        </controls:Carousel>
     </Grid>
 </UserControl>

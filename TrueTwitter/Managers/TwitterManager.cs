@@ -114,7 +114,7 @@ namespace TrueTwitter.Managers
                             Date = tweet.CreatedAt,
                             URL = tweet.Url,
                             AssociatedID = taskToId[task],
-                            MediaURI = tweet.Media.Select(item => item.URL).ToList(),
+                            MediaURI = tweet.Media.Select(item => new MediaItem() { URI=item.MediaURL }).ToList(),
                             User = new Models.User()
                             {
                                 Name=tweet.CreatedBy.Name,

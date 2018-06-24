@@ -23,7 +23,7 @@ namespace TrueTwitter.Models
             this.Date = t.Date;
             this.URL = t.URL;
             this.AssociatedID = t.AssociatedID;
-            this.MediaURI = new List<string>(t.MediaURI);
+            this.MediaURI = new List<MediaItem>(t.MediaURI);
             this.User = new User(t.User);
         }
 
@@ -50,7 +50,7 @@ namespace TrueTwitter.Models
         /// <summary>
         /// List of associated media URI
         /// </summary>
-        public List<String> MediaURI { get; set; }
+        public List<MediaItem> MediaURI { get; set; }
 
         /// <summary>
         /// User that post the Tweet

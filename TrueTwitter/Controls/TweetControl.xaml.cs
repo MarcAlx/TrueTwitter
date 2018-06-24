@@ -38,6 +38,8 @@ namespace TrueTwitter.Controls
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
 
+            
+
         }
 
         private async void openButton_Click(object sender, RoutedEventArgs e)
