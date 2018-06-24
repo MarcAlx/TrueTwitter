@@ -159,4 +159,7 @@
   <data name="SettingsPage_Follow_Input.PlaceholderText" xml:space="preserve">
     <value>@who, #what, worldcup...</value>
   </data>
+  <data name="MainPage_refreshButton.Content" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
 </root>

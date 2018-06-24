@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace TrueTwitter
 {
+
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
@@ -30,6 +31,18 @@ namespace TrueTwitter
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(SettingsPage));
+        }
+
+        private async void refreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.searchProgressRing.IsActive = true;
+            var tmp = await App.AppTwitterManager.GetTweets(App.AppSettingsManager.Followings);
+            ;
+
+            this.cvs.Source = from item in tmp
+                      group item by item.AssociatedID into g
+                      select g;
+            this.searchProgressRing.IsActive = false;
         }
     }
 }
