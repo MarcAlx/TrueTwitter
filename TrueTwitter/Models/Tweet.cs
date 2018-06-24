@@ -8,6 +8,25 @@ namespace TrueTwitter.Models
 {
     public class Tweet
     {
+        public Tweet()
+        {
+
+        }
+
+        /// <summary>
+        /// Constructor by copy
+        /// </summary>
+        /// <param name="t"></param>
+        public Tweet(Tweet t)
+        {
+            this.Content = t.Content;
+            this.Date = t.Date;
+            this.URL = t.URL;
+            this.AssociatedID = t.AssociatedID;
+            this.MediaURI = new List<string>(t.MediaURI);
+            this.User = new User(t.User);
+        }
+
         /// <summary>
         /// Content of the Tweet
         /// </summary>

@@ -162,4 +162,7 @@
   <data name="MainPage_refreshButton.Content" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="MainPage_AllCategory_Name" xml:space="preserve">
+    <value>All</value>
+  </data>
 </root>

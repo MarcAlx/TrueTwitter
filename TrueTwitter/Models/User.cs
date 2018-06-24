@@ -11,6 +11,21 @@ namespace TrueTwitter.Models
     /// </summary>
     public class User
     {
+        public User()
+        {
+
+        }
+
+        /// <summary>
+        /// Constructor by copy
+        /// </summary>
+        /// <param name="user"></param>
+        public User(User user)
+        {
+            this.Name = user.Name;
+            this.ImageURI = user.ImageURI;
+        }
+
         /// <summary>
         /// The name of the account
         /// </summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TrueTwitter.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -36,12 +37,25 @@ namespace TrueTwitter
         private async void refreshButton_Click(object sender, RoutedEventArgs e)
         {
             this.searchProgressRing.IsActive = true;
-            var tmp = await App.AppTwitterManager.GetTweets(App.AppSettingsManager.Followings);
-            ;
 
-            this.cvs.Source = from item in tmp
+            var res = new List<Tweet>();
+            var tmp = await App.AppTwitterManager.GetTweets(App.AppSettingsManager.Followings);
+
+            //add a "All" category by copying all tweets
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            var allTitle = loader.GetString("MainPage_AllCategory_Name");
+            res.AddRange(tmp.Select(t =>
+            {
+                var twt = new Tweet(t);
+                twt.AssociatedID = allTitle;
+                return twt;
+            }));
+            res.AddRange(tmp);
+
+            var groupedTweets = from item in res
                       group item by item.AssociatedID into g
                       select g;
+            this.cvs.Source = groupedTweets;
             this.searchProgressRing.IsActive = false;
         }
 
