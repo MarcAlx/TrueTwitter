@@ -104,7 +104,7 @@ namespace TrueTwitter.Managers
             //3. Produce results from TweetInvi models
             foreach(var task in toWait)
             {
-                if(task.IsCompleted && !task.IsFaulted && !task.IsCanceled)
+                if(task.IsCompleted && !task.IsFaulted && !task.IsCanceled && task.Result!=null)
                 {
                     foreach(var tweet in task.Result)
                     {
