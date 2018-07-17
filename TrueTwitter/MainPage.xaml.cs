@@ -72,16 +72,14 @@ namespace TrueTwitter
             res.Sort((x, y) =>
             {
                 if (x.AssociatedID.Equals(y.AssociatedID)) {
-                    return 0;
+                    return y.Date.CompareTo(x.Date);
                 }
-
                 //all always first
-                if (x.AssociatedID.Equals(allTitle))
+                else if (x.AssociatedID.Equals(allTitle))
                 {
                     return -1;
                 }
-
-                return x.AssociatedID.CompareTo(y.AssociatedID);
+                return y.Date.CompareTo(x.Date);
             });
 
             var groupedTweets = from item in res
