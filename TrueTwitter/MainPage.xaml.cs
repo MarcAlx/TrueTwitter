@@ -68,10 +68,26 @@ namespace TrueTwitter
                     res.Add(t);
                 }
             }
-            
+
+            res.Sort((x, y) =>
+            {
+                if (x.AssociatedID.Equals(y.AssociatedID)) {
+                    return 0;
+                }
+
+                //all always first
+                if (x.AssociatedID.Equals(allTitle))
+                {
+                    return -1;
+                }
+
+                return x.AssociatedID.CompareTo(y.AssociatedID);
+            });
+
             var groupedTweets = from item in res
                       group item by item.AssociatedID into g
                       select g;
+            
             this.cvs.Source = groupedTweets;
             this.searchProgressRing.IsActive = false;
         }

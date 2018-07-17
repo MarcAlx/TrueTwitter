@@ -53,13 +53,14 @@
             VerticalAlignment="Center"
             />
         <ListView 
+            x:Name="lv"
             Grid.Row="2"
             Grid.ColumnSpan="2"
             ItemsSource="{Binding Source={StaticResource cvs}}"
             ScrollViewer.HorizontalScrollMode="Enabled" 
             ScrollViewer.HorizontalScrollBarVisibility="Auto"
-            ScrollViewer.VerticalScrollMode="Enabled"
-            ScrollViewer.VerticalScrollBarVisibility="Auto">
+            ScrollViewer.VerticalScrollMode="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapGrid Orientation="Vertical" MaximumRowsOrColumns="1"/>
@@ -74,7 +75,35 @@
                             </Grid>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
-                    
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="GroupItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="GroupItem">
+                                        <Grid MaxHeight="{Binding ActualHeight, ElementName=lv, Mode=OneWay}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Row="0"/>
+                                            <ItemsControl x:Name="ItemsControl2" ItemsSource="{Binding GroupItems}" Grid.Row="1">
+                                                <ItemsControl.Template>
+                                                    <ControlTemplate>
+                                                        <ScrollViewer x:Name="ScrollViewer" 
+                                                                      VerticalScrollBarVisibility="Visible"                                                  
+                                                                      VerticalScrollMode="Enabled" 
+                                                                      HorizontalScrollBarVisibility="Disabled"                                                  HorizontalScrollMode="Disabled">
+                                                            <ItemsPresenter />
+                                                        </ScrollViewer>
+                                                    </ControlTemplate>
+                                                </ItemsControl.Template>
+                                            </ItemsControl>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
                 </GroupStyle>
             </ListView.GroupStyle>
             <ListView.ItemTemplate>
