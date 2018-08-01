@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:vm="using:TrueTwitter.ViewModels"
     xmlns:model="using:TrueTwitter.Models"
     xmlns:utils="using:TrueTwitter.Utils"
     mc:Ignorable="d"
@@ -12,6 +13,9 @@
     <Page.Resources>
         <utils:BooleanToVisibilityConverter x:Key="Converter" />
     </Page.Resources>
+    <Page.DataContext>
+        <vm:SettingsPageViewModel/>
+    </Page.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -29,7 +33,7 @@
                    HorizontalAlignment="Left" 
                    Style="{ThemeResource TitleTextBlockStyle}" 
                    Text=""/>
-        <Button x:Name="homeButton" Grid.Row="0" Grid.Column="1" Background="Transparent" Click="homeButton_Click">
+        <Button x:Name="homeButton" Grid.Row="0" Grid.Column="1" Background="Transparent" Command="{Binding GoToMainPageCommand}">
             <FontIcon
                       FontSize="20"
                       Glyph="&#xE80F;" 
@@ -54,9 +58,10 @@
                         Grid.Column="0"
                         KeyUp="followInput_KeyUp"
                         x:Uid="SettingsPage_Follow_Input" 
-                        x:Name="followInput">
+                        x:Name="followInput"
+                        Text="{Binding FollowInputText, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     </TextBox>
-                    <Button x:Name="addFollow" Margin="5,0,5,0" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Click="addFollow_Click">
+                    <Button x:Name="addFollow" Margin="5,0,5,0" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Command="{Binding AddFollowCommand}">
                         <FontIcon
                           FontSize="20"
                           Glyph="&#xE710;"
@@ -64,7 +69,7 @@
                           VerticalAlignment="Center" 
                           HorizontalAlignment="Center"/>
                     </Button>
-                    <ListView CanReorderItems="True" AllowDrop="True" CanDragItems="True" ItemsSource="{x:Bind Following}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ReorderMode="Enabled">
+                    <ListView x:Name="followItems" CanReorderItems="True" AllowDrop="True" CanDragItems="True" ItemsSource="{Binding Following}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ReorderMode="Enabled">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="model:FollowItem">
                                 <Grid Margin="5,5,5,5">
@@ -105,7 +110,7 @@
                                         VerticalAlignment="Stretch" 
                                         Grid.Row="0" 
                                         Grid.Column="1" 
-                                        Click="deleteFollow_Click"
+                                        Command="{Binding ElementName=followItems, Path=DataContext.DeleteFollowCommand}"
                                         CommandParameter="{Binding}">
                                         <FontIcon
                                               FontSize="20"
@@ -134,10 +139,10 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Margin="0,5,0,5" Grid.Row="0" Grid.Column="0" x:Uid="SettingsPage_ConsumerKey"></TextBlock>
-                    <TextBox   Margin="0,5,0,5" Grid.Row="0" Grid.Column="1" x:Uid="SettingsPage_ConsumerKey_Input" x:Name="consumerKeyInput"></TextBox>
+                    <TextBox   Margin="0,5,0,5" Grid.Row="0" Grid.Column="1" x:Uid="SettingsPage_ConsumerKey_Input" x:Name="consumerKeyInput" Text="{Binding ConsumerKey, Mode=TwoWay}"></TextBox>
                     <TextBlock Margin="0,5,0,5" Grid.Row="1" Grid.Column="0" x:Uid="SettingsPage_ConsumerSecret"></TextBlock>
-                    <TextBox   Margin="0,5,0,5" Grid.Row="1" Grid.Column="1" x:Uid="SettingsPage_ConsumerSecret_Input" x:Name="consumerSecretInput"></TextBox>
-                    <Button x:Name="submitCredentials" Margin="5,0,5,0" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Click="submitCredentials_Click">
+                    <TextBox   Margin="0,5,0,5" Grid.Row="1" Grid.Column="1" x:Uid="SettingsPage_ConsumerSecret_Input" x:Name="consumerSecretInput" Text="{Binding ConsumerSecret, Mode=TwoWay}"></TextBox>
+                    <Button x:Name="submitCredentials" Margin="5,0,5,0" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Command="{Binding SubmitCredentialsCommand}">
                         <FontIcon
                           FontSize="20"
                           Glyph="&#xE73E;" 
@@ -145,7 +150,7 @@
                           VerticalAlignment="Center" 
                           HorizontalAlignment="Center"/>
                     </Button>
-                    <TextBlock x:Name="statusText" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Uid="SettingsPage_Status"></TextBlock>
+                    <TextBlock x:Name="statusText" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Uid="SettingsPage_Status" Text="{Binding StatusText}"></TextBlock>
                     <controls:MarkdownTextBlock Grid.Row="3" Grid.ColumnSpan="3" x:Uid="SettingsPage_Credentials_Info" LinkClicked="MarkdownTextBlock_LinkClicked" />
                 </Grid>
             </PivotItem>
@@ -153,7 +158,7 @@
                 <StackPanel>
                     <controls:MarkdownTextBlock x:Uid="SettingsPage_AboutText" Text="" LinkClicked="MarkdownTextBlock_LinkClicked">
                     </controls:MarkdownTextBlock>
-                    <TextBlock Margin="0,5,0,0" x:Name="appInfoLabel"/>
+                    <TextBlock Margin="0,5,0,0" x:Name="appInfoLabel" Text="{Binding InfoLabel}"/>
                 </StackPanel>
             </PivotItem>
         </Pivot>
