@@ -27,11 +27,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <Ellipse Margin="5,5,5,5" Grid.Column="0" Grid.RowSpan="3" Height="75" Width="75">
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding Model.User.ImageURI, Mode=TwoWay}"/>
-            </Ellipse.Fill>
-        </Ellipse>
+        <Border Margin="5,5,5,5" Grid.Column="0" Grid.RowSpan="3" Height="75" Width="75" CornerRadius="5">
+            <Image Source="{Binding Model.User.ImageURI, Mode=TwoWay}"/>
+        </Border>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Model.User.Name}" FontWeight="Bold"/>
         <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Model.AssociatedID}"/>
         <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Model.Date, Converter={StaticResource Converter}}" FontStyle="Italic"/>
