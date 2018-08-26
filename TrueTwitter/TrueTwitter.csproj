@@ -120,6 +120,7 @@
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\CountToVisibilityConverter.cs" />
     <Compile Include="Utils\BooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\DateToStringConverter.cs" />
     <Compile Include="Utils\RelayCommand.cs" />

@@ -12,6 +12,7 @@
     d:DesignWidth="400">
     <UserControl.Resources>
         <utils:DateToStringConverter x:Key="Converter"/>
+        <utils:CountToVisibilityConverter x:Key="CountToVisConverter"/>
     </UserControl.Resources>
 
     <Grid Margin="5,5,5,5" Width="400" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
@@ -37,33 +38,21 @@
         <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Model.Date, Converter={StaticResource Converter}}" FontStyle="Italic"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Model.Content}" Padding="2,2,2,2" TextWrapping="WrapWholeWords"/>
         <!--Media-->
-        <controls:Carousel 
-            x:Name="mediaCarousel"
+        <FlipView x:Name="mediaCarousel"
             Grid.Row="3"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            ItemsSource="{Binding Model.MediaURI}"
-            InvertPositive="True" 
-            ItemDepth="300"
-            ItemMargin="0" 
-            ItemRotationX="0"
-            ItemRotationY="45" 
-            ItemRotationZ="0"
-            SelectedIndex="0"
-            Orientation="Horizontal">
-            <controls:Carousel.EasingFunction>
-                <CubicEase EasingMode="EaseOut" />
-            </controls:Carousel.EasingFunction>
-            <controls:Carousel.ItemTemplate>
+            MaxHeight="200"
+            Visibility="{Binding Model.MediaURI.Count, Converter={StaticResource CountToVisConverter}}"
+            ItemsSource="{Binding Model.MediaURI}">
+            <FlipView.ItemTemplate>
                 <DataTemplate>
-                    <Image Width="200"
-                           Height="200"
-                           VerticalAlignment="Center"
+                    <Image VerticalAlignment="Center"
                            Source="{Binding URI}"
                            Stretch="Uniform" />
                 </DataTemplate>
-            </controls:Carousel.ItemTemplate>
-        </controls:Carousel>
+            </FlipView.ItemTemplate>
+        </FlipView>
         <!--Action bar-->
         <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
@@ -73,7 +62,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="openButton" Click="openButton_Click" Grid.Row="0" Grid.Column="0">
+            <Button x:Name="openButton" Click="openButton_Click" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch">
                 <FontIcon
                 FontSize="20"
                 Glyph="&#xE72D;"
