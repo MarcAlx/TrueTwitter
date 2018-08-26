@@ -55,6 +55,8 @@
             x:Name="searchProgressRing"
             Grid.Row="2"
             Grid.ColumnSpan="2"
+            Width="50"
+            Height="50"
             Visibility="{Binding IsFetching, Converter={StaticResource Converter}}"
             IsActive="{Binding IsFetching}"
             HorizontalAlignment="Center"
