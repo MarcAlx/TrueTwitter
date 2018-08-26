@@ -20,31 +20,28 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <Border Margin="5,5,5,5" Grid.Column="0" Grid.RowSpan="3" Height="75" Width="75" CornerRadius="5">
+        <!--User image-->
+        <Border Margin="5,5,5,5" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Top" Height="75" Width="75" CornerRadius="5">
             <Image Source="{Binding Model.User.ImageURI, Mode=TwoWay}"/>
         </Border>
+        <!--tweet-->
         <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Model.User.Name}" FontWeight="Bold"/>
         <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Model.AssociatedID}"/>
         <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Model.Date, Converter={StaticResource Converter}}" FontStyle="Italic"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Model.Content}" Padding="2,2,2,2" TextWrapping="WrapWholeWords"/>
-        <Button x:Name="openButton" Click="openButton_Click" Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" VerticalAlignment="Stretch">
-            <FontIcon
-                FontSize="20"
-                Glyph="&#xE72D;"
-                MirroredWhenRightToLeft="True" 
-                HorizontalAlignment="Center"/>
-        </Button>
+        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Model.Content}" Padding="2,2,2,2" TextWrapping="WrapWholeWords"/>
+        <!--Media-->
         <controls:Carousel 
             x:Name="mediaCarousel"
             Grid.Row="3"
-            Grid.ColumnSpan="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
             ItemsSource="{Binding Model.MediaURI}"
             InvertPositive="True" 
             ItemDepth="300"
@@ -67,5 +64,22 @@
                 </DataTemplate>
             </controls:Carousel.ItemTemplate>
         </controls:Carousel>
+        <!--Action bar-->
+        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="openButton" Click="openButton_Click" Grid.Row="0" Grid.Column="0">
+                <FontIcon
+                FontSize="20"
+                Glyph="&#xE72D;"
+                MirroredWhenRightToLeft="True" 
+                HorizontalAlignment="Center"/>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>
