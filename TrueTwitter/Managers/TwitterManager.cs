@@ -120,7 +120,7 @@ namespace TrueTwitter.Managers
                                 User = new Models.User()
                                 {
                                     Name = tweet.CreatedBy.Name,
-                                    ImageURI = tweet.CreatedBy.ProfileImageUrl
+                                    ImageURI = tweet.CreatedBy.ProfileImageUrl400x400
                                 }
                             });
                         }
