@@ -43,5 +43,28 @@ namespace TrueTwitter.Controls
         {
             await Windows.System.Launcher.LaunchUriAsync(new Uri(this.Model.URL));
         }
+
+        private async void replyButton_Click(object sender, RoutedEventArgs e)
+        {
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(this.Model.ReplyURL));
+        }
+
+        private async void retweetButton_Click(object sender, RoutedEventArgs e)
+        {
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(this.Model.RetweetURL));
+        }
+
+        private async void likeButton_Click(object sender, RoutedEventArgs e)
+        {
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(this.Model.LikeURL));
+        }
+
+        private  async void openAllUrlButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(var iu in this.Model.InnerURL)
+            {
+                await Windows.System.Launcher.LaunchUriAsync(new Uri(iu));
+            }
+        }
     }
 }

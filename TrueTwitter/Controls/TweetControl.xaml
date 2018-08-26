@@ -62,10 +62,59 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="openButton" Click="openButton_Click" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch">
+            <Button x:Name="replyButton"
+                    Grid.Row="0" 
+                    Click="replyButton_Click"
+                    Grid.Column="0" 
+                    HorizontalAlignment="Stretch">
                 <FontIcon
                 FontSize="20"
-                Glyph="&#xE72D;"
+                Glyph="&#xE97A;"
+                MirroredWhenRightToLeft="True" 
+                HorizontalAlignment="Center"/>
+            </Button>
+            <Button x:Name="retweetButton"
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Click="retweetButton_Click"
+                    HorizontalAlignment="Stretch">
+                <FontIcon
+                FontSize="20"
+                Glyph="&#xE895;"
+                MirroredWhenRightToLeft="True" 
+                HorizontalAlignment="Center"/>
+            </Button>
+            <Button x:Name="likeButton"
+                    Grid.Row="0" 
+                    Grid.Column="2" 
+                    Click="likeButton_Click"
+                    HorizontalAlignment="Stretch">
+                <FontIcon
+                FontSize="20"
+                Glyph="&#xEB51;"
+                MirroredWhenRightToLeft="True" 
+                HorizontalAlignment="Center"/>
+            </Button>
+            <Button x:Name="openButton" 
+                    Click="openButton_Click" 
+                    Grid.Row="0" 
+                    Grid.Column="3" 
+                    HorizontalAlignment="Stretch">
+                <FontIcon
+                FontSize="20"
+                Glyph="&#xE774;"
+                MirroredWhenRightToLeft="True" 
+                HorizontalAlignment="Center"/>
+            </Button>
+            <Button x:Name="openAllUrlButton"
+                    Grid.Row="0" 
+                    Click="openAllUrlButton_Click"
+                    Grid.Column="4" 
+                    Visibility="{Binding Model.InnerURL.Count, Converter={StaticResource CountToVisConverter}}"
+                    HorizontalAlignment="Stretch">
+                <FontIcon
+                FontSize="20"
+                Glyph="&#xEA53;"
                 MirroredWhenRightToLeft="True" 
                 HorizontalAlignment="Center"/>
             </Button>

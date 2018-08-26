@@ -8,6 +8,21 @@ namespace TrueTwitter.Models
 {
     public class Tweet
     {
+        /// <summary>
+        /// URL template for retweet : https://developer.twitter.com/en/docs/twitter-for-websites/web-intents/overview
+        /// </summary>
+        private static string RETWEET_TEMPLATE_URL = "https://twitter.com/intent/retweet?tweet_id={0}";
+
+        /// <summary>
+        /// URL template for like : https://developer.twitter.com/en/docs/twitter-for-websites/web-intents/overview
+        /// </summary>
+        private static string LIKE_TEMPLATE_URL = "https://twitter.com/intent/like?tweet_id={0}";
+
+        /// <summary>
+        /// URL template for reply : https://developer.twitter.com/en/docs/twitter-for-websites/web-intents/overview
+        /// </summary>
+        private static string REPLY_TEMPLATE_URL = "https://twitter.com/intent/tweet?in_reply_to={0}";
+
         public Tweet()
         {
 
@@ -22,6 +37,8 @@ namespace TrueTwitter.Models
             this.Content = t.Content;
             this.Date = t.Date;
             this.URL = t.URL;
+            this.InnerURL = t.InnerURL;
+            this.Id = t.Id;
             this.AssociatedID = t.AssociatedID;
             this.MediaURI = new List<MediaItem>(t.MediaURI);
             this.User = new User(t.User);
@@ -59,8 +76,55 @@ namespace TrueTwitter.Models
         public List<MediaItem> MediaURI { get; set; }
 
         /// <summary>
+        /// Id of the tweet
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
         /// User that post the Tweet
         /// </summary>
         public User User { get; set; }
+
+        /// <summary>
+        /// Url that lead to intent retweet of this tweet
+        /// </summary>
+        public string RetweetURL {
+            get
+            {
+                return String.Format(Tweet.RETWEET_TEMPLATE_URL,this.Id);
+            }
+        }
+
+        /// <summary>
+        /// Url that lead to intent like of this tweet
+        /// </summary>
+        public string LikeURL
+        {
+            get
+            {
+                return String.Format(Tweet.LIKE_TEMPLATE_URL, this.Id);
+            }
+        }
+
+        /// <summary>
+        /// Url that lead to intent reply of this tweet
+        /// </summary>
+        public string ReplyURL
+        {
+            get
+            {
+                return String.Format(Tweet.REPLY_TEMPLATE_URL, this.Id);
+            }
+        }
+
+        /// <summary>
+        /// Url mentionned inside tweet text
+        /// 
+        /// Could also be achieved by parsing : https://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
+        /// </summary>
+        public List<string> InnerURL
+        {
+            get; set;
+        }
     }
 }

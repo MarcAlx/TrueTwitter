@@ -111,9 +111,11 @@ namespace TrueTwitter.Managers
                         if (String.IsNullOrEmpty(tweet.InReplyToScreenName)){
                             res.Add(new Models.Tweet()
                             {
+                                InnerURL = tweet.Urls.Select(x=>x.ExpandedURL).ToList(),
                                 Content = tweet.Text,
                                 Date = tweet.CreatedAt,
                                 URL = tweet.Url,
+                                Id = tweet.IdStr,
                                 AssociatedID = taskToItem[task].Id,
                                 AssociatedFollowItem = taskToItem[task],
                                 MediaURI = tweet.Media.Select(item => new MediaItem() { URI = item.MediaURL }).ToList(),
